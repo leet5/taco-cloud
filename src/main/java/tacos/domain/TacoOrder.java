@@ -7,10 +7,14 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class TacoOrder {
+
+    private Long id;
+
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
 
@@ -37,6 +41,8 @@ public class TacoOrder {
     private String ccCVV;
 
     private final List<Taco> tacos = new ArrayList<>();
+
+    private Date placedAt;
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
