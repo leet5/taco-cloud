@@ -1,21 +1,22 @@
 package tacos.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity
+@Document
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Ingredient implements Serializable {
     @Id
     private String id;
-
     private String name;
-
-    @Enumerated(EnumType.STRING)
     private Type type;
 
     public enum Type {

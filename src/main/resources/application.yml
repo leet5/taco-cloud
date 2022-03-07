@@ -7,3 +7,11 @@ spring:
         open-in-view: false
         hibernate:
             ddl-auto: update
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: tacoclouddb
+    mongodb:
+        embedded:
+            version: 3.2.8

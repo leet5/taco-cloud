@@ -6,6 +6,6 @@ import tacos.domain.TacoOrder;
 import java.util.Date;
 import java.util.List;
 
-public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
+public interface OrderRepository extends CrudRepository<TacoOrder, String> {
     List<TacoOrder> findByPlacedAtBetween(Date start, Date end);
 }
