@@ -4,8 +4,8 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serial;
 import java.io.Serializable;
@@ -23,21 +23,6 @@ public class TacoOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Delivery name is required")
-    private String deliveryName;
-
-    @NotBlank(message = "Street is required")
-    private String deliveryStreet;
-
-    @NotBlank(message = "City is required")
-    private String deliveryCity;
-
-    @NotBlank(message = "State is required")
-    private String deliveryState;
-
-    @NotBlank(message = "Zip code is required")
-    private String deliveryZip;
-
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
 
@@ -53,6 +38,10 @@ public class TacoOrder implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
+
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
