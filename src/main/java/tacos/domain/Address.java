@@ -1,6 +1,8 @@
 package tacos.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,4 +33,12 @@ public class Address implements Serializable {
 
     @NotBlank(message = "Zip code is required")
     private String zip;
+
+    public Address(String name, String street, String city, String state, String zip) {
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+    }
 }

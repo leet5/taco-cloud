@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <img th:src="@{/images/TacoCloud.png}"/>
+
+    <form method="POST" th:action="@{/register}" th:object="${registrationForm}">
+        <label for="username">Username: </label>
+        <input type="text" name="username" th:field="*{username}"/><br/>
+
+        <label for="password">Password: </label>
+        <input type="password" name="password" th:field="*{password}"/><br/>
+
+        <label for="confirm">Confirm password: </label>
+        <input type="password" name="confirm"/><br/>
+
+        <!-- Address -->
+        <label for="address.name">Address name: </label>
+        <input type="text" name="address.name" th:field="*{address.name}"/>
+        <span class=validationError th:if="${#fields.hasErrors('address.name')}" th:errors="*{address.name}">Name err</span><br/>
+
+        <label for="address.street">Street: </label>
+        <input type="text" name="address.street" th:field="*{address.street}"/>
+        <span class=validationError th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Street err</span><br/>
+
+        <label for="address.city">City: </label>
+        <input type="text" name="address.city" th:field="*{address.city}"/>
+        <span class=validationError th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">City err</span><br/>
+
+        <label for="address.state">State: </label>
+        <input type="text" name="address.state" th:field="*{address.state}"/>
+        <span class=validationError th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}">State err</span><br/>
+
+        <label for="address.zip">Zip: </label>
+        <input type="text" name="address.zip" th:field="*{address.zip}"/>
+        <span class=validationError th:if="${#fields.hasErrors('address.zip')}" th:errors="*{address.zip}">Zip err</span><br/>
+        <!--         -->
+
+        <label for="phone">Phone: </label>
+        <input type="text" name="phone" th:field="*{phone}"/><br/>
+
+        <input type="submit" value="Register"/>
+    </form>
+</body>
+</html>
