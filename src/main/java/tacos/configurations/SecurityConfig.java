@@ -29,17 +29,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
         return http
                 .authorizeRequests()
                   .antMatchers("/design", "/orders").hasRole("USER")
                   .antMatchers("/", "/**").permitAll()
-                .and()
-                  .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/design", true)
-                .and()
-                .build();
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
+                .and().csrf().ignoringAntMatchers("/h2-console/**")
+                .and().headers().frameOptions().sameOrigin()
+                .and().build();
     }
 }
