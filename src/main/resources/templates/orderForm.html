@@ -9,6 +9,7 @@
 </head>
 <body>
     <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         <h1>Order your taco creations!</h1>
         <img th:src="@{/images/TacoCloud.png}"/><br/>
 
@@ -21,29 +22,6 @@
                     <span th:text="${taco.name}">taco name</span>
                 </li>
             </ul>
-        </div>
-
-        <div>
-            <h3>Deliver my taco masterpiece to...</h3>
-            <label for="address.name">Name: </label>
-            <input type="text" th:field="*{address.name}"/>
-            <span class="validationError" th:if="${#fields.hasErrors('address.name')}" th:errors="*{address.name}">Name error</span><br/>
-
-            <label for="address.street">Street: </label>
-            <input type="text" th:field="*{address.street}"/>
-            <span class="validationError" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Street error</span><br/>
-
-            <label for="address.city">City: </label>
-            <input type="text" th:field="*{address.city}"/>
-            <span class="validationError" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">City error</span><br/>
-
-            <label for="address.state">State: </label>
-            <input type="text" th:field="*{address.state}"/>
-            <span class="validationError" th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}">State error</span><br/>
-
-            <label for="address.zip">Zip code: </label>
-            <input type="text" th:field="*{address.zip}"/>
-            <span class="validationError" th:if="${#fields.hasErrors('address.zip')}" th:errors="*{address.zip}">Zip error</span><br/>
         </div>
 
         <div>

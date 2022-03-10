@@ -12,6 +12,7 @@
     <img th:src="@{/images/TacoCloud.png}"/>
 
     <form method="POST" th:object="${taco}">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         <span class="validationError" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">Ingredients error</span>
         <div class="grid">
             <div class="ingredient-group" id="wraps">

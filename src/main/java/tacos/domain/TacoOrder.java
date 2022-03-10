@@ -4,7 +4,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 import java.io.Serial;
@@ -39,9 +38,8 @@ public class TacoOrder implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
 
-    @Valid
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+    @ManyToOne
+    private User user;
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
