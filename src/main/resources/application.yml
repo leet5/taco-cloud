@@ -1,6 +1,12 @@
+server:
+    port: 8443
+    ssl:
+        key-store: src/main/resources/mykeys.jks
+        key-store-password: password
+        key-password: password
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/TacoCloud?currentSchema=tacoSchema
+        url: jdbc:postgresql://localhost:5432/TacoCloud?currentSchema=taco_schema
         username: admin
         password: admin
         driver-class-name: org.postgresql.Driver

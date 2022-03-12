@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
             ingredientRepo.save(new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
 
             final Address address = new Address("Home", "Street", "City", "MW", "600000");
-            userRepo.save(new User("admin", "admin", "admin", "+79999999999", address));
+            userRepo.save(new User("admin", encoder.encode("admin"), "admin", "+79999999999", address));
         };
     }
 }

@@ -1,1 +1,1 @@
-CREATE SCHEMA tacoSchema;
+CREATE SCHEMA taco_schema;
