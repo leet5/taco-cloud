@@ -1,10 +1,8 @@
-server:
-    port: 8443
-    ssl:
-        key-store: src/main/resources/mykeys.jks
-        key-store-password: password
-        key-password: password
+---
 spring:
+    config:
+        activate:
+            on-profile: prod
     datasource:
         url: jdbc:postgresql://localhost:5432/TacoCloud?currentSchema=taco_schema
         username: admin
@@ -15,7 +13,26 @@ spring:
         hibernate.ddl-auto: update
         properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     thymeleaf:
+        cache: true
+server:
+    port: 8443
+    ssl:
+        key-store: src/main/resources/mykeys.jks
+        key-store-password: password
+        key-password: password
+taco.orders.pageSize: 10
+
+---
+spring:
+    config:
+        activate:
+            on-profile: dev
+    datasource:
+        generate-unique-name: false
+        name: tacocloud
+    jpa:
+        open-in-view: false
+        hibernate.ddl-auto: update
+    thymeleaf:
         cache: false
-taco:
-    orders:
-        pageSize: 10
+taco.orders.pageSize: 10
