@@ -3,6 +3,7 @@ package tacos.configurations;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,6 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @Profile("dev")
     public CommandLineRunner dataLoader(PasswordEncoder encoder, UserRepository userRepo, OrderRepository orderRepo, IngredientRepository ingredientRepo) {
         return args -> {
             // Cleanup
