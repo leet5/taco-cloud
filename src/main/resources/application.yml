@@ -13,8 +13,9 @@ spring:
     jpa:
         open-in-view: false
         hibernate.ddl-auto: update
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
+        properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     thymeleaf:
         cache: false
+taco:
+    orders:
+        pageSize: 10

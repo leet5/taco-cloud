@@ -8,8 +8,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import tacos.domain.Address;
 import tacos.domain.Ingredient;
+import tacos.domain.TacoOrder;
 import tacos.domain.User;
 import tacos.repositories.IngredientRepository;
+import tacos.repositories.OrderRepository;
 import tacos.repositories.UserRepository;
 
 @Configuration
@@ -21,8 +23,13 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public CommandLineRunner dataLoader(IngredientRepository ingredientRepo, UserRepository userRepo, PasswordEncoder encoder) {
+    public CommandLineRunner dataLoader(PasswordEncoder encoder, UserRepository userRepo, OrderRepository orderRepo, IngredientRepository ingredientRepo) {
         return args -> {
+            // Cleanup
+            orderRepo.deleteAll();
+            userRepo.deleteAll();
+
+            // Ingredients
             ingredientRepo.save(new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
             ingredientRepo.save(new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP));
             ingredientRepo.save(new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN));
@@ -34,8 +41,21 @@ public class WebConfig implements WebMvcConfigurer {
             ingredientRepo.save(new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
             ingredientRepo.save(new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
 
+            // Users
             final Address address = new Address("Home", "Street", "City", "MW", "600000");
-            userRepo.save(new User("admin", encoder.encode("admin"), "admin", "+79999999999", address));
+            final User user = new User("admin", encoder.encode("admin"), "admin", "+79999999999", address);
+            userRepo.save(user);
+
+            // Orders
+            for (int i = 0; i < 20; i++) {
+                final TacoOrder order = new TacoOrder();
+                order.setCcNumber("0000000000000000");
+                order.setCcExpiration("01/20");
+                order.setCcCVV(100 + i + "");
+                order.setUser(user);
+
+                orderRepo.save(order);
+            }
         };
     }
 }

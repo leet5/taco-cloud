@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Taco implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 5, message = "Name must be at least 5 characters long")
