@@ -36,3 +36,6 @@ spring:
     thymeleaf:
         cache: false
 taco.orders.pageSize: 10
+springdoc:
+    swagger-ui:
+        path: /swagger-ui.html
