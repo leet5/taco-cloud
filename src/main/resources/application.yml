@@ -24,15 +24,13 @@ taco.orders.pageSize: 10
 
 ---
 spring:
-    config:
-        activate:
-            on-profile: dev
+    config.activate.on-profile: dev
     datasource:
         generate-unique-name: false
         name: tacocloud
     jpa:
         open-in-view: false
         hibernate.ddl-auto: update
-    thymeleaf:
-        cache: false
+    thymeleaf.cache: false
+    data.rest.base-path: /api
 taco.orders.pageSize: 10

@@ -33,13 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/design/**", "/orders/**").hasRole("USER")
+//                .antMatchers("/design/**", "/orders/**").hasRole("USER")
                 .antMatchers("/", "/**").permitAll()
             .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
             .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
+                .csrf().ignoringAntMatchers("/**")
             .and()
-                .headers().frameOptions().sameOrigin();
+                .headers().frameOptions().sameOrigin()
+            .and()
+                .cors().disable();
     }
 }
