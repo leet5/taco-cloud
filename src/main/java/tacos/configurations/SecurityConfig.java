@@ -2,6 +2,7 @@ package tacos.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,7 +14,7 @@ import tacos.domain.User;
 import tacos.repositories.UserRepository;
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -33,15 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-//                .antMatchers("/design/**", "/orders/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/api-secured/ingredients/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api-secured/ingredients/**").hasRole("ADMIN")
+
+                .antMatchers("/design/**", "/orders/**", "/api/**").hasRole("USER")
                 .antMatchers("/", "/**").permitAll()
             .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
             .and()
                 .csrf().ignoringAntMatchers("/**")
             .and()
-                .headers().frameOptions().sameOrigin()
-            .and()
-                .cors().disable();
+                .headers().frameOptions().sameOrigin();
     }
 }

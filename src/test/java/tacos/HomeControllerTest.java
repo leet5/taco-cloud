@@ -8,7 +8,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import tacos.repositories.IngredientRepository;
 import tacos.repositories.OrderRepository;
 import tacos.repositories.UserRepository;
-import tacos.services.OrderAdminService;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,9 +24,6 @@ public class HomeControllerTest {
 
     @MockBean
     private UserRepository userRepository;
-
-    @MockBean
-    private OrderAdminService adminService;
 
     @Autowired
     private MockMvc mockMvc;
