@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import tacos.configurations.OrderProps;
 import tacos.repositories.IngredientRepository;
 import tacos.repositories.OrderRepository;
 import tacos.repositories.UserRepository;
@@ -24,6 +25,9 @@ public class HomeControllerTest {
 
     @MockBean
     private UserRepository userRepository;
+
+    @MockBean
+    private OrderProps orderProps;
 
     @Autowired
     private MockMvc mockMvc;
