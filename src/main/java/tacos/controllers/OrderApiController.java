@@ -2,6 +2,7 @@ package tacos.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 import tacos.domain.TacoOrder;
 import tacos.repositories.OrderRepository;
@@ -31,6 +32,12 @@ public class OrderApiController {
 
     @GetMapping
     public void getOrder() throws JMSException {
+        final TacoOrder result = messageService.receiveOrder();
+        System.out.println(result);
+    }
+
+    @JmsListener(destination = "tacocloud.order.queue")
+    public void getOrderByListener() throws JMSException {
         final TacoOrder result = messageService.receiveOrder();
         System.out.println(result);
     }
