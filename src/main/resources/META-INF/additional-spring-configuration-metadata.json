@@ -4,5 +4,15 @@
       "name": "taco.orders.pageSize",
       "type": "java.lang.Integer",
       "description": "Sets the maximum number of orders to display in a list."
-  }
+    },
+    {
+      "name": "taco.orders.exchange",
+      "type": "java.lang.String",
+      "description": "Sets RabbitMQ orders exchange path."
+    },
+    {
+      "name": "taco.orders.routingKey",
+      "type": "java.lang.String",
+      "description": "Sets RabbitMQ orders queue routing-key."
+    }
 ] }

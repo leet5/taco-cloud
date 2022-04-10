@@ -26,11 +26,12 @@ taco.orders.pageSize: 10
 spring:
     config.activate.on-profile: dev
     security.oauth2.resourceserver.jwt.jwk-set-uri: http://localhost:9000/oauth2/jwks
-    artemis:
+    rabbitmq:
         host: localhost
-        port: 61616
-        user: admin
+        port: 5672
+        username: admin
         password: admin
+        virtual-host: demo-vhost
     datasource:
         generate-unique-name: false
         name: tacocloud
@@ -39,4 +40,7 @@ spring:
         hibernate.ddl-auto: update
     thymeleaf.cache: false
     data.rest.base-path: /api
-taco.orders.pageSize: 10
+taco.orders:
+    pageSize: 10
+    exchange: "tacocloud.order"
+    routing-key: "kitchens.central"

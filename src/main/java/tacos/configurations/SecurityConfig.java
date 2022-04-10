@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, restPath + "/api-secured/ingredients/**").hasAuthority("SCOPE_writeIngredients")
                 .antMatchers(HttpMethod.DELETE, restPath + "/api-secured/ingredients/**").hasAuthority("SCOPE_deleteIngredients")
 
-                .antMatchers(restPath + "/orders/**").hasAuthority("SCOPE_orders")
+//                .antMatchers(restPath + "/orders/**").hasAuthority("SCOPE_orders")
                 .antMatchers(restPath + "/tacos/**").hasAuthority("SCOPE_tacos")
-                .antMatchers(restPath + "/users/**").hasAuthority("SCOPE_users")
+//                .antMatchers(restPath + "/users/**").hasAuthority("SCOPE_users")
                 .antMatchers(restPath + "/ingredients/**").hasAuthority("SCOPE_ingredients")
 
                 .antMatchers("/design/**", "/orders/**", "/api/**").hasRole("USER")

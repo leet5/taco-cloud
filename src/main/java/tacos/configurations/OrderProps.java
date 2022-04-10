@@ -16,4 +16,8 @@ public class OrderProps {
     @Min(value = 5, message = "Must be between 5 and 25")
     @Max(value = 25, message = "Must be between 5 and 25")
     private int pageSize = 20;
+
+    private String exchange = "tacocloud.order";
+
+    private String routingKey = "kitchens.central";
 }

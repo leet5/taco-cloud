@@ -1,17 +1,15 @@
 package tacos.controllers;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 import tacos.domain.TacoOrder;
 import tacos.repositories.OrderRepository;
 import tacos.services.OrderMessagingService;
 
-import javax.jms.JMSException;
-
 @RestController
-@RequestMapping(path = "/jms/orders", produces = "application/json")
+@RequestMapping(path = "/amqp/orders", produces = "application/json")
 @CrossOrigin(origins = "http://localhost:8080")
 public class OrderApiController {
     private final OrderRepository repo;
@@ -31,14 +29,13 @@ public class OrderApiController {
     }
 
     @GetMapping
-    public void getOrder() throws JMSException {
+    public void getOrder() {
         final TacoOrder result = messageService.receiveOrder();
         System.out.println(result);
     }
 
-    @JmsListener(destination = "tacocloud.order.queue")
-    public void getOrderByListener() throws JMSException {
-        final TacoOrder result = messageService.receiveOrder();
-        System.out.println(result);
+    @RabbitListener(queues = {"${taco.orders.routing-key}"})
+    public void getOrderByListener(TacoOrder order) {
+        System.out.println(order);
     }
 }

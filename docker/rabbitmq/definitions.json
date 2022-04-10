@@ -1,0 +1,56 @@
+{
+  "rabbit_version": "3.9.14",
+  "rabbitmq_version": "3.9.14",
+  "product_name": "RabbitMQ",
+  "product_version": "3.9.14",
+  "vhosts": [{
+    "name": "demo-vhost"
+  }],
+  "permissions": [{
+    "user": "admin",
+    "vhost": "demo-vhost",
+    "configure": ".*",
+    "write": ".*",
+    "read": ".*"
+  }],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@a8d5c6e08439"
+    },
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-gXeBLbsUC2W2tU0Bx_QY_w"
+    }
+  ],
+  "policies": [],
+  "queues": [{
+      "name": "kitchens.central",
+      "vhost": "demo-vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-mode": "lazy",
+        "x-queue-type": "classic"
+      }
+  }],
+  "exchanges": [{
+    "name": "tacocloud.order",
+    "vhost": "demo-vhost",
+    "type": "direct",
+    "durable": true,
+    "auto_delete": false,
+    "internal": false,
+    "arguments": {}
+  }],
+  "bindings": [{
+    "source": "tacocloud.order",
+    "vhost": "demo-vhost",
+    "destination": "kitchens.central",
+    "destination_type": "queue",
+    "routing_key": "kitchens.central",
+    "arguments": {}
+  }]
+}
